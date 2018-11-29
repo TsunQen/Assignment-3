@@ -16,13 +16,13 @@ public abstract class Command extends SymbolicExpression {
      */
     @Override
     public SymbolicExpression eval(Environment vars) throws IllegalExpressionException {
-	throw new IllegalExpressionException("Commands may not be evaluated");
+        throw new IllegalExpressionException("Commands may not be evaluated");
     }
 
     /**
      * @see SymbolicExpression#isCommand()
      */
     public boolean isCommand() {
-	return true;
+        return true;
     }
 }

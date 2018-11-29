@@ -14,24 +14,24 @@ public class Assignment extends Binary {
      * @param rhs the variable being assigned to
      */
     public Assignment(SymbolicExpression lhs, SymbolicExpression rhs) {
-	super(lhs, rhs);
-	this.lhs = lhs;
-	this.rhs = rhs;
-	
+        super(lhs, rhs);
+        this.lhs = lhs;
+        this.rhs = rhs;
+
     }
 
     /**
      * @see SymbolicExpression#getName()
      */
     public String getName() {
-	return "=";
+        return "=";
     }
 
     /**
      * @brief prints the assignment node
      */
     public String toString() {
-	return this.lhs + "";
+        return this.lhs + "";
     }
 
 
@@ -39,19 +39,19 @@ public class Assignment extends Binary {
      * @see SymbolicExpression#eval(Environment vars)
      */
     public SymbolicExpression eval(Environment vars) {
-	SymbolicExpression lhs_result = this.lhs.eval(vars);
-	SymbolicExpression rhs_result = this.rhs;
-	if(rhs_result.isConstant()) {
-	    throw new IllegalExpressionException("Error: cannot redefine named constant");
-	}
+        SymbolicExpression lhs_result = this.lhs.eval(vars);
+        SymbolicExpression rhs_result = this.rhs;
+        if(rhs_result.isConstant()) {
+            throw new IllegalExpressionException("Error: cannot redefine named constant");
+        }
 
-	Variable rhs_var = new Variable(rhs_result.toString());
-	vars.put(rhs_var, lhs_result);
+        Variable rhs_var = new Variable(rhs_result.toString());
+        vars.put(rhs_var, lhs_result);
 
-	if(lhs_result.isConstant()) {
-	    return new Constant(lhs_result.getValue());
-	} else {
-	return new Assignment(lhs_result, rhs_result);
-	}
+        if(lhs_result.isConstant()) {
+            return new Constant(lhs_result.getValue());
+        } else {
+            return new Assignment(lhs_result, rhs_result);
+        }
     }
 }
