@@ -7,18 +7,26 @@ import org.ioopm.calculator.ast.*;
 import java.util.Scanner;
 
 class Calculator {
+    public static void printStatistics(int totalEntered, int successEval, int fullyEval)
+    {
+        System.out.println("\nStatistics ");
+        System.out.println("* Total expression entered: " + totalEntered);
+        System.out.println("* Succesfully evaluated expressions: " + successEval);
+        System.out.println("* Fully evaulated expressions: " + fullyEval);
+    }
+
     public static void main(String[] args) {
         final CalculatorParser parser = new CalculatorParser();
         Environment vars = new Environment();
-        Environment vars_bup = new Environment();
+        Environment vars_backup = new Environment();
         int fullyEval = 0;
-        int succesEval = 0;
+        int successEval = 0;
         int totalEntered = 0;
 
         int quit = 0;
         while(quit == 0)
             try {
-                vars_bup = vars;
+                vars_backup = vars;
                 System.out.print("Enter an expression: ");
                 String input = System.console().readLine();
                 totalEntered++;
@@ -27,10 +35,7 @@ class Calculator {
                     totalEntered--;
                     if(answer == Quit.instance()) {
                         quit = 1;
-                        System.out.println("\nStatistics ");
-                        System.out.println("* Total expression entered: " + totalEntered);
-                        System.out.println("* Succesfully evaluated expressions: " + succesEval);
-                        System.out.println("* Fully evaulated expressions: " + fullyEval);
+                        printStatistics(totalEntered, successEval, fullyEval);
                     } else if(answer == Vars.instance()) {
                         for(Variable var : vars.keySet()) {
                             System.out.println(var + " = " + vars.get(var));
@@ -41,7 +46,7 @@ class Calculator {
                 } else {
                     SymbolicExpression result = answer.eval(vars);
                     System.out.println(result);
-                    succesEval++;
+                    successEval++;
                     if(result instanceof Constant) {
                         fullyEval++;
                     }
@@ -58,7 +63,7 @@ class Calculator {
             catch(IllegalExpressionException e) {
                 System.out.print("Illegal Expression: ");
                 System.out.println(e.getMessage());
-                vars = vars_bup;
+                vars = vars_backup;
                 continue;
             }
 

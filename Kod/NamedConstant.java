@@ -3,7 +3,7 @@ package org.ioopm.calculator.ast;
  * Subclass of Atom
  */
 public class NamedConstant extends Atom {
-    private double value = 1;
+    private double value;
     private String name;
     private Constants ht = new Constants();
 
