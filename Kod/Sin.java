@@ -11,26 +11,26 @@ public class Sin extends Unary {
      * @param subtree the expression to operate sin on
      */
     public Sin(SymbolicExpression subtree) {
-	super(subtree);
-	this.subtree = subtree;
+        super(subtree);
+        this.subtree = subtree;
     }
 
     /**
      * @see SymbolicExpression#getName()
      */
     public String getName() {
-	return "sin ";
+        return "sin ";
     }
 
     /**
      * @see SymbolicExpression#eval(Environment vars)
      */
     public SymbolicExpression eval(Environment vars) {
-	SymbolicExpression subtree = this.subtree.eval(vars);
-	if (subtree.isConstant()) {
-	    return new Constant(Math.sin(subtree.getValue()));
-	} else {
-	    return new Sin(subtree);
-	}
+        SymbolicExpression subtree = this.subtree.eval(vars);
+        if (subtree.isConstant()) {
+            return new Constant(Math.sin(subtree.getValue()));
+        } else {
+            return new Sin(subtree);
+        }
     }
 }

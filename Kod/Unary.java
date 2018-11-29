@@ -11,14 +11,14 @@ public abstract class Unary extends SymbolicExpression {
      * @param subtree the subtree to be operated
      */
     public Unary(SymbolicExpression subtree) {
-	this.subtree = subtree;
+        this.subtree = subtree;
     }
 
     /**
      * @brief prints the node
      */
     public String toString() {
-	return this.getName() + "" + this.subtree.toString();
+        return this.getName() + "" + this.subtree.toString();
     }
 
     /**
@@ -27,14 +27,14 @@ public abstract class Unary extends SymbolicExpression {
      * @return true if objects are equal, else false
      */
     public boolean equals(Object other) {
-	if (other instanceof Unary) {
-	    return this.equals((Unary) other);
-	} else {
-	    return false;
-	}
+        if (other instanceof Unary) {
+            return this.equals((Unary) other);
+        } else {
+            return false;
+        }
     }
 
     public boolean equals(Unary other) {
-	return this.subtree.equals(other.subtree);
+        return this.subtree.equals(other.subtree);
     }
 }
